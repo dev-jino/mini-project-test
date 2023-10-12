@@ -22,69 +22,69 @@ function Login() {
   {/* ************************************ */}
 
   return (
-    <div class="login">
-      <div class="wrapper">
-        <div class="header">
-          <div class="container">
-            <div class="div">
-              <div class="logo-icon">
-                <div class="logo-text">HowMuch</div>
-                <img class="logo-img" src={logo} />
+    <div className="login">
+      <div className="wrapper">
+        <div className="header">
+          <div className="container">
+            <div className="div">
+              <div className="logo-icon">
+                <div className="logo-text">HowMuch</div>
+                <img className="logo-img" src={logo} />
               </div>
-              <div class="header-input"><img class="search-icon" src={search_logo} /></div>
-              <div class="main-menu">
-                <div class="menu-item"><div class="menu-item-txt">장바구니</div></div>
-                <div class="menu-item"><div class="menu-item-txt">주문조회</div></div>
-                <div class="menu-item"><div class="text-wrapper">마이페이지</div></div>
-                <div class="menu-item"><div class="menu-item-txt">로그아웃</div></div>
+              <div className="header-input"><img className="search-icon" src={search_logo} /></div>
+              <div className="main-menu">
+                <div className="menu-item"><div className="menu-item-txt">장바구니</div></div>
+                <div className="menu-item"><div className="menu-item-txt">주문조회</div></div>
+                <div className="menu-item"><div className="text-wrapper">마이페이지</div></div>
+                <div className="menu-item"><div className="menu-item-txt">로그아웃</div></div>
               </div>
             </div>
           </div>
         </div>
-        <div class="main">
-          <div class="container-2">
-            <div class="title"><div class="title-msg">로그인</div></div>
-            <div class="order-check-pre">
-              {/* <div class="button-confirm">
-                <div class="button-confirm-text">카카오 로그인</div>
+        <div className="main">
+          <div className="container-2">
+            <div className="title"><div className="title-msg">로그인</div></div>
+            <div className="order-check-pre">
+              {/* <div className="button-confirm">
+                <div className="button-confirm-text">카카오 로그인</div>
               </div> */}
-              <button class="button-confirm" onClick={MoveKakaoLogin}>
-                <img class="" src={kakao_login_img}></img>
+              <button className="button-confirm" onClick={MoveKakaoLogin}>
+                <img className="" src={kakao_login_img}></img>
               </button>
             </div>
             {/* ************************************ */}
-            <div class="title"><div class="title-msg">로그아웃</div></div>
-            <div class="order-check-pre">
-              <button class="button-confirm" onClick={MoveKakaoLogout}>
-                <img class="" src={kakao_login_img}></img>
+            <div className="title"><div className="title-msg">로그아웃</div></div>
+            <div className="order-check-pre">
+              <button className="button-confirm" onClick={MoveKakaoLogout}>
+                <img className="" src={kakao_login_img}></img>
               </button>
             </div>
             {/* ************************************ */}
-            <div class="title"><div class="title-msg">회원이 아니시라면...?</div></div>
-            {/* <div class="button-confirm">
-              <div class="button-confirm-text">카카오로 시작하기</div>
+            <div className="title"><div className="title-msg">회원이 아니시라면...?</div></div>
+            {/* <div className="button-confirm">
+              <div className="button-confirm-text">카카오로 시작하기</div>
             </div> */}
-            <button class="button-confirm">
-              <img class="" src={kakao_join_img}></img>
+            <button className="button-confirm">
+              <img className="" src={kakao_join_img}></img>
             </button>
           </div>
         </div>
-        <footer class="footer">
-          <div class="row-wrapper">
-            <div class="row">
-              <div class="col">
-                <div class="row-2">
-                  <div class="logo-icon-2">
-                    <div class="logo-text">HowMuch</div>
-                    <img class="logo-img" src={logo} />
+        <footer className="footer">
+          <div className="row-wrapper">
+            <div className="row">
+              <div className="col">
+                <div className="row-2">
+                  <div className="logo-icon-2">
+                    <div className="logo-text">HowMuch</div>
+                    <img className="logo-img" src={logo} />
                   </div>
-                  <p class="footer-text">현재 웹 사이트는 Mini-Project의 일환으로 실제로 물건을 판매하지 않습니다.</p>
+                  <p className="footer-text">현재 웹 사이트는 Mini-Project의 일환으로 실제로 물건을 판매하지 않습니다.</p>
                 </div>
               </div>
-              <div class="col">
-                <div class="row-2">
-                  <img class="git-hub" src={github_logo} />
-                  <p class="p">현재 웹사이트의 소스 코드는 하단의 Git Hub에서 확인하실 수 있습니다.</p>
+              <div className="col">
+                <div className="row-2">
+                  <img className="git-hub" src={github_logo} />
+                  <p className="p">현재 웹사이트의 소스 코드는 하단의 Git Hub에서 확인하실 수 있습니다.</p>
                 </div>
               </div>
             </div>

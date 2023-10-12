@@ -1,0 +1,20 @@
+{
+    "user": [
+      {
+        "idx": 0,
+        "id": "3067792529",
+        "email": "test@test.com",
+        "nicename": "typicode",
+        "phone": "010-0000-0000",
+        "address": "abcdefg"
+      },
+      {
+        "idx": 1,
+        "id": "3067792528",
+        "email": "test1@test.com",
+        "nicename": "typicode2",
+        "phone": "010-0000-0000",
+        "address": "abcdefg"
+      }
+    ]
+  }

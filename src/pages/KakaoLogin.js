@@ -5,8 +5,42 @@ import './KakaoLogin.css';
 import axios from 'axios';
 import { useEffect } from 'react';
 
+function findUserData(tokenData) {
+    const tokenId = tokenData.data.id;
+    const tokenEmail = tokenData.data.kakao_account.email;
+    const xhr = new XMLHttpRequest();
+
+    xhr.open("GET", `http://localhost:3001/user?id=${tokenId}`);
+    xhr.setRequestHeader("content-type", "application/json");
+    xhr.send(null);
+
+    xhr.onload = () => {
+        if (xhr.status === 200) {
+            const users = JSON.parse(xhr.response);
+            console.log(users);
+            if (users.length != 0) {
+                console.log("길이 0이아님");
+                return true;
+            }
+            // users.map((user) => {
+            //     if (tokenId == user.id || tokenEmail == user.email) {
+            //         console.log("일치");
+            //         return true;
+            //     } else {
+            //         console.log("불일치");
+            //         return false;
+            //     }
+            // });
+            
+        } else {
+            console.log(xhr.status, xhr.statusText);
+        }
+    }
+}
 
 function KakaoLogin() {
+    const [userDB, setUserDB] = useState([]);
+
     useEffect(() => {
         const PARAMS = new URL(document.location).searchParams;
         const AUTHORIZE_CODE = PARAMS.get("code");
@@ -15,7 +49,8 @@ function KakaoLogin() {
         const REDIRECT_URI = `${process.env.REACT_APP_REDIRECT_URI}`;
     
         // axios
-        axios.post(`https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${AUTHORIZE_CODE}`,
+        axios.post(
+            `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${AUTHORIZE_CODE}`,
             {},
             {
                 headers: {
@@ -24,10 +59,9 @@ function KakaoLogin() {
             }
         )
         .then((res) => {
-            console.log(res);
+            console.log("res1 :", res);
             const { data } = res;
             const { access_token } = data;
-            console.log(access_token);
 
             if (access_token) {
                 console.log(`Bearer ${access_token}`);
@@ -42,7 +76,18 @@ function KakaoLogin() {
                     }
                 )
                 .then((res) => {
-                    console.log(res);
+                    setUserDB([...]);
+                    console.log("res2 :", res);
+                    // const getUsers = findUserData(res);
+                    // console.log(getUsers);
+                    // console.log(findUserData(res));
+
+                    if (findUserData(res)) {
+                        // window.location.replace("/");
+                        console.log("if문");
+                    } else {
+                        console.log("else문");
+                    }
                 });
             }
             
