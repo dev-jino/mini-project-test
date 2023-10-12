@@ -3,34 +3,29 @@
 import { useNavigate } from 'react-router-dom';
 import './KakaoLogin.css';
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function findUserData(tokenData) {
-    const tokenId = tokenData.data.id;
-    const tokenEmail = tokenData.data.kakao_account.email;
+    const tokenId = tokenData.id;
+    const tokenEmail = tokenData.kakao_account.email;
     const xhr = new XMLHttpRequest();
 
-    xhr.open("GET", `http://localhost:3001/user?id=${tokenId}`);
+    xhr.open("GET", "http://localhost:3001/user");
     xhr.setRequestHeader("content-type", "application/json");
     xhr.send(null);
 
     xhr.onload = () => {
         if (xhr.status === 200) {
             const users = JSON.parse(xhr.response);
-            console.log(users);
-            if (users.length != 0) {
-                console.log("길이 0이아님");
-                return true;
-            }
-            // users.map((user) => {
-            //     if (tokenId == user.id || tokenEmail == user.email) {
-            //         console.log("일치");
-            //         return true;
-            //     } else {
-            //         console.log("불일치");
-            //         return false;
-            //     }
-            // });
+            users.map((user) => {
+                if (tokenId == user.id || tokenEmail == user.email) {
+                    console.log("일치", user);
+                    return true;
+                } else {
+                    console.log("불일치", user);
+                    return false;
+                }
+            });
             
         } else {
             console.log(xhr.status, xhr.statusText);
@@ -39,7 +34,10 @@ function findUserData(tokenData) {
 }
 
 function KakaoLogin() {
-    const [userDB, setUserDB] = useState([]);
+    const [userDB, setUserDB] = useState({
+        id:"",
+        kakao_account:""
+    });
 
     useEffect(() => {
         const PARAMS = new URL(document.location).searchParams;
@@ -59,7 +57,6 @@ function KakaoLogin() {
             }
         )
         .then((res) => {
-            console.log("res1 :", res);
             const { data } = res;
             const { access_token } = data;
 
@@ -76,23 +73,20 @@ function KakaoLogin() {
                     }
                 )
                 .then((res) => {
-                    setUserDB([...]);
-                    console.log("res2 :", res);
-                    // const getUsers = findUserData(res);
-                    // console.log(getUsers);
-                    // console.log(findUserData(res));
-
-                    if (findUserData(res)) {
-                        // window.location.replace("/");
-                        console.log("if문");
-                    } else {
-                        console.log("else문");
-                    }
+                    setUserDB(res.data);
                 });
             }
             
         });
     }, []);
+    
+    useEffect(() => {
+        console.log('test');
+        console.log("UserDB : ", userDB);
+        // if (userDB.id != '' & userDB.kakao_account != '') {
+            findUserData(userDB);
+        // }
+    }, [userDB]);
 
     return (
         <div>
