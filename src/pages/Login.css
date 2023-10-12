@@ -199,13 +199,13 @@
   
   .login .button-confirm {
     display: inline-flex;
-    align-items: flex-start;
-    gap: 10px;
-    position: relative;
-    flex: 0 0 auto;
-    background-color: #fbf445;
+    /* align-items: flex-start; */
+    /* gap: 10px; */
+    /* position: relative; */
+    /* flex: 0 0 auto; */
+    /* background-color: #fbf445; */
     border-radius: 10px;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
   
   .login .button-confirm-text {
