@@ -1,20 +1,81 @@
 {
-    "user": [
-      {
-        "idx": 0,
-        "id": "30677925271",
-        "email": "test@test.com",
-        "nicename": "typicode",
-        "phone": "010-0000-0000",
-        "address": "abcdefg"
-      },
-      {
-        "idx": 1,
-        "id": "3067792528",
-        "email": "test1@test.com",
-        "nicename": "typicode2",
-        "phone": "010-0000-0000",
-        "address": "abcdefg"
-      }
-    ]
-  }
+  "user": [
+    {
+      "id": 1,
+      "userid": "30677925271",
+      "nickname": "ㅁㄴㅇㄹ",
+      "email": "ㄴㅁㅇㄹ",
+      "phone": "ㄴㅁㅇㄹ",
+      "address1": "ㄴㅁㅇㄹ",
+      "address2": "ㄴㅁㅇㄹ",
+      "address3": "ㄴㅁㅇㄹ",
+      "status": 1
+    },
+    {
+      "id": 2,
+      "userid": "30677925271",
+      "nickname": "234",
+      "email": "234",
+      "phone": "234",
+      "address1": "234",
+      "address2": "234",
+      "address3": "234",
+      "status": 1
+    },
+    {
+      "id": 3,
+      "userid": "30677925271",
+      "nickname": "ㄴㅇㄹ",
+      "email": "ㅈㄹㄷ",
+      "phone": "ㄴㅇㅁㄹ",
+      "address1": "ㄴㅇㅁㄹ",
+      "address2": "ㄴㅇㅁㄹ",
+      "address3": "ㄴㅁㅇㄹ",
+      "status": 1
+    },
+    {
+      "id": 4,
+      "userid": "30677925271",
+      "nickname": "ㄴㅇㅁㄹ",
+      "email": "ㄴㅁㅇㄹ",
+      "phone": "ㅁㄴㅇㄹ",
+      "address1": "ㅁㄴㅇㄹ",
+      "address2": "ㅁㄴㅇㄹ",
+      "address3": "ㅁㄴㅇㄹ",
+      "status": 1
+    },
+    {
+      "id": 5,
+      "userid": "30677925271",
+      "nickname": "ㅁㄴㅇㄹ",
+      "email": "ㄴㅁㅇㄹ",
+      "phone": "ㅁㄴㅁㅇㄹ",
+      "address1": "ㅁㄴㅇㄹ",
+      "address2": "ㄴㅁㅇㄹ",
+      "address3": "ㅁㄴㅇㄹ",
+      "status": 1
+    },
+    {
+      "id": 6,
+      "userid": "30677925271",
+      "nickname": "ㅁㄴㅇㄹ",
+      "email": "ㄴㅁㅇㄹ",
+      "phone": "ㄴㅁㅇㄹ",
+      "address1": "ㄴㅁㅇㄹ",
+      "address2": "ㄴㅁㅇㄹ",
+      "address3": "ㄴㅁㅇㄹ",
+      "status": 1
+    },
+    {
+      "id": 7,
+      "userid": "3067792527",
+      "nickname": "ㄴㅇㄹ",
+      "email": "ㅁㄴㅇㄹ",
+      "phone": "ㄴㅁㅇㄹ",
+      "address1": "ㄴㅁㅇㄹ",
+      "address2": "ㅁㄴㅇㄹ",
+      "address3": "ㅁㄴㅇㄹ",
+      "status": 1
+    }
+  ]
+}

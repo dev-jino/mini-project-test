@@ -1,6 +1,6 @@
 // 페이지를 이동할 때 사용
 //(특정 이벤트가 실행됐을 때 동작하도록 하거나 추가적인 로직이 필요한 경우 사용)
-import { useNavigate, redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './KakaoLogin.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 function KakaoLogin() {
     const [loginUserInfo, setLoginUserInfo] = useState({
         id:"",
+        nickname:"",
         email:""
     });
     const navigate = useNavigate();
@@ -33,6 +34,8 @@ function KakaoLogin() {
             const { data } = res;
             const { access_token } = data;
 
+            console.log("res : ", res);
+
             if (access_token) {
                 console.log(`Bearer ${access_token}`);
                 axios.post(
@@ -46,7 +49,11 @@ function KakaoLogin() {
                     }
                 )
                 .then((res) => {
-                    setLoginUserInfo({id:res.data.id, email:res.data.kakao_account.email});
+
+                    console.log("res : ", res);
+                    console.log("res.data : ", res.data);
+                    console.log("res.kakao_account : ", res.kakao_account);
+                    setLoginUserInfo({id:res.data.id, nickname:res.data.kakao_account.nickname, email:res.data.kakao_account.email});
                 });
             }
         });
@@ -62,30 +69,17 @@ function KakaoLogin() {
 
     function findUserData(tokenData) {
         const tokenId = tokenData.id;
-        const tokenEmail = tokenData.email;
+        const tokenKakaoAccount = tokenData.kakao_account;
+        console.log(tokenData);
         const xhr = new XMLHttpRequest();
     
-        // xhr.open("GET", "http://localhost:3001/user");
-        xhr.open("GET", `http://localhost:3001/user?id=${tokenId}`);
+        xhr.open("GET", `http://localhost:3001/user?userid=${tokenId}`);
         xhr.setRequestHeader("content-type", "application/json");
         xhr.send(null);
     
         xhr.onload = () => {
             if (xhr.status === 200) {
-                // const users = JSON.parse(xhr.response);
-                // console.log("users : ", users);
-                
-                // for (let i = 0 ; i < users.length ; i++) {
-                //     if (users[i].id == tokenId) {
-                //         console.log("같음");
-                //         navigate('/');
-                //         // return true;
-                //     }
-                // }
-                // console.log("다름");
-                // navigate('/join');
-
-                console.log(xhr.response);
+                console.log("xhr.response : ",xhr.response);
                 console.log(xhr.response.length);
                 const users = JSON.parse(xhr.response);
                 console.log("users : ", users);
