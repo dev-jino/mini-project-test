@@ -12,6 +12,7 @@ import AdminUserManage from "./pages/AdminUserManage";
 import AdminItemManage from "./pages/AdminItemManage";
 
 import KakaoLogin from "./pages/KakaoLogin";
+import Join from "./pages/Join";
 
 function App() {
   return (
@@ -28,7 +29,8 @@ function App() {
         <Route path='/admin-login' element={<AdminLogin />} />
         <Route path='/admin-user-manage' element={<AdminUserManage />} />
         <Route path='/admin-item-manage' element={<AdminItemManage />} />
-
+        <Route path='join' element={<Join/>} />
+        
         <Route path="/kakao-login" element={<KakaoLogin />} />
 
       </Routes>

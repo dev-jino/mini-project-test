@@ -1,43 +1,16 @@
 // 페이지를 이동할 때 사용
 //(특정 이벤트가 실행됐을 때 동작하도록 하거나 추가적인 로직이 필요한 경우 사용)
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, redirect } from 'react-router-dom';
 import './KakaoLogin.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-
-function findUserData(tokenData) {
-    const tokenId = tokenData.id;
-    const tokenEmail = tokenData.email;
-    const xhr = new XMLHttpRequest();
-
-    xhr.open("GET", "http://localhost:3001/user");
-    xhr.setRequestHeader("content-type", "application/json");
-    xhr.send(null);
-
-    xhr.onload = () => {
-        if (xhr.status === 200) {
-            const users = JSON.parse(xhr.response);
-            users.map((user) => {
-                if (tokenId == user.id || tokenEmail == user.email) {
-                    console.log("일치", user);
-                    return true;
-                } else {
-                    console.log("불일치", user);
-                    return false;
-                }
-            });
-            
-        } else {
-            console.log(xhr.status, xhr.statusText);
-        }
-    }
-}
 
 function KakaoLogin() {
     const [loginUserInfo, setLoginUserInfo] = useState({
         id:"",
         email:""
     });
+    const navigate = useNavigate();
 
     useEffect(() => {
         const PARAMS = new URL(document.location).searchParams;
@@ -76,7 +49,6 @@ function KakaoLogin() {
                     setLoginUserInfo({id:res.data.id, email:res.data.kakao_account.email});
                 });
             }
-            
         });
     }, []);
     
@@ -87,6 +59,48 @@ function KakaoLogin() {
             findUserData(loginUserInfo);
         }
     }, [loginUserInfo]);
+
+    function findUserData(tokenData) {
+        const tokenId = tokenData.id;
+        const tokenEmail = tokenData.email;
+        const xhr = new XMLHttpRequest();
+    
+        // xhr.open("GET", "http://localhost:3001/user");
+        xhr.open("GET", `http://localhost:3001/user?id=${tokenId}`);
+        xhr.setRequestHeader("content-type", "application/json");
+        xhr.send(null);
+    
+        xhr.onload = () => {
+            if (xhr.status === 200) {
+                // const users = JSON.parse(xhr.response);
+                // console.log("users : ", users);
+                
+                // for (let i = 0 ; i < users.length ; i++) {
+                //     if (users[i].id == tokenId) {
+                //         console.log("같음");
+                //         navigate('/');
+                //         // return true;
+                //     }
+                // }
+                // console.log("다름");
+                // navigate('/join');
+
+                console.log(xhr.response);
+                console.log(xhr.response.length);
+                const users = JSON.parse(xhr.response);
+                console.log("users : ", users);
+                if (users.length === 0) {
+                    console.log('로그인 실패');
+                    navigate('/join', {state: tokenData});
+                } else {
+                    console.log('로그인 완료');
+                    navigate('/');
+                }
+            } else {
+                console.log(xhr.status, xhr.statusText);
+            }
+        }
+    }
 
     return (
         <div>
