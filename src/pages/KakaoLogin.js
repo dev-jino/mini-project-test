@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 function findUserData(tokenData) {
     const tokenId = tokenData.id;
-    const tokenEmail = tokenData.kakao_account.email;
+    const tokenEmail = tokenData.email;
     const xhr = new XMLHttpRequest();
 
     xhr.open("GET", "http://localhost:3001/user");
@@ -34,9 +34,9 @@ function findUserData(tokenData) {
 }
 
 function KakaoLogin() {
-    const [userDB, setUserDB] = useState({
+    const [loginUserInfo, setLoginUserInfo] = useState({
         id:"",
-        kakao_account:""
+        email:""
     });
 
     useEffect(() => {
@@ -73,7 +73,7 @@ function KakaoLogin() {
                     }
                 )
                 .then((res) => {
-                    setUserDB(res.data);
+                    setLoginUserInfo({id:res.data.id, email:res.data.kakao_account.email});
                 });
             }
             
@@ -82,11 +82,11 @@ function KakaoLogin() {
     
     useEffect(() => {
         console.log('test');
-        console.log("UserDB : ", userDB);
-        // if (userDB.id != '' & userDB.kakao_account != '') {
-            findUserData(userDB);
-        // }
-    }, [userDB]);
+        console.log("UserDB : ", loginUserInfo);
+        if (loginUserInfo.id != '' && loginUserInfo.kakao_account != '') {
+            findUserData(loginUserInfo);
+        }
+    }, [loginUserInfo]);
 
     return (
         <div>
