@@ -13,27 +13,35 @@ import AdminItemManage from "./pages/AdminItemManage";
 
 import KakaoLogin from "./pages/KakaoLogin";
 import Join from "./pages/Join";
+import { IsLoginProvider } from "./contexts/IsLoginContext";
+import { useContext } from "react";
+import { IsLoginContext } from "./contexts/IsLoginContext";
 
 function App() {
+  const data = useContext(IsLoginContext);
+
+  console.log(data);
+
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/search-result' element={<Search />} />
-        <Route path='/item-detail' element={<ItemDetail />} />
-        <Route path='/order' element={<Order />} />
-        <Route path='/order-check' element={<OrderCheck />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='/admin-join' element={<AdminJoin />} />
-        <Route path='/admin-login' element={<AdminLogin />} />
-        <Route path='/admin-user-manage' element={<AdminUserManage />} />
-        <Route path='/admin-item-manage' element={<AdminItemManage />} />
-        <Route path='join' element={<Join/>} />
-        
-        <Route path="/kakao-login" element={<KakaoLogin />} />
-
-      </Routes>
+      <IsLoginProvider>
+        <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/search-result' element={<Search />} />
+            <Route path='/item-detail' element={<ItemDetail />} />
+            <Route path='/order' element={<Order />} />
+            <Route path='/order-check' element={<OrderCheck />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/cart' element={<Cart />} />
+            <Route path='/admin-join' element={<AdminJoin />} />
+            <Route path='/admin-login' element={<AdminLogin />} />
+            <Route path='/admin-user-manage' element={<AdminUserManage />} />
+            <Route path='/admin-item-manage' element={<AdminItemManage />} />
+            <Route path='join' element={<Join/>} />
+            
+            <Route path="/kakao-login" element={<KakaoLogin />} />
+        </Routes>
+      </IsLoginProvider>
     </BrowserRouter>
 
 

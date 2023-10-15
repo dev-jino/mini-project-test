@@ -3,15 +3,18 @@
 import { useNavigate } from 'react-router-dom';
 import './KakaoLogin.css';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { IsLoginContext } from '../contexts/IsLoginContext';
 
 function KakaoLogin() {
     const [loginUserInfo, setLoginUserInfo] = useState({
         id:"",
         nickname:"",
-        email:""
+        email:"",
+        data:""
     });
     const navigate = useNavigate();
+    const { setIsLogin } = useContext(IsLoginContext);
 
     useEffect(() => {
         const PARAMS = new URL(document.location).searchParams;
@@ -53,7 +56,7 @@ function KakaoLogin() {
                     console.log("res : ", res);
                     console.log("res.data : ", res.data);
                     console.log("res.kakao_account : ", res.kakao_account);
-                    setLoginUserInfo({id:res.data.id, nickname:res.data.kakao_account.nickname, email:res.data.kakao_account.email});
+                    setLoginUserInfo({id:res.data.id, nickname:res.data.kakao_account.nickname, email:res.data.kakao_account.email, data:data});
                 });
             }
         });
@@ -68,12 +71,16 @@ function KakaoLogin() {
     }, [loginUserInfo]);
 
     function findUserData(tokenData) {
-        const tokenId = tokenData.id;
+        const tokenUserId = tokenData.id;
         const tokenKakaoAccount = tokenData.kakao_account;
         console.log(tokenData);
+
+        const sessionStorage = window.sessionStorage;
+        // const { setIsLogin } = useContext(IsLoginContext);
+
         const xhr = new XMLHttpRequest();
     
-        xhr.open("GET", `http://localhost:3001/user?userid=${tokenId}`);
+        xhr.open("GET", `http://localhost:3001/user?userid=${tokenUserId}`);
         xhr.setRequestHeader("content-type", "application/json");
         xhr.send(null);
     
@@ -83,10 +90,20 @@ function KakaoLogin() {
                 console.log(xhr.response.length);
                 const users = JSON.parse(xhr.response);
                 console.log("users : ", users);
+
+                sessionStorage.setItem("access_token", tokenData.data.access_token);
+                sessionStorage.setItem("refresh_token", tokenData.data.refresh_token);
+
                 if (users.length === 0) {
                     console.log('로그인 실패');
                     navigate('/join', {state: tokenData});
                 } else {
+                    sessionStorage.setItem("userData", JSON.stringify(users));
+                    // sessionStorage.setItem("access_token", tokenData.data.access_token);
+                    // sessionStorage.setItem("refresh_token", tokenData.data.refresh_token);
+                    
+                    setIsLogin(true);
+
                     console.log('로그인 완료');
                     navigate('/');
                 }

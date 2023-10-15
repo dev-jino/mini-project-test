@@ -40,6 +40,10 @@ function Join() {
       if (xhr.status === 201) {
         const post = JSON.parse(xhr.responseText);
         console.log(post);
+
+        sessionStorage.setItem("userData", JSON.stringify(post));
+
+
         alert(`${post.nickname}님의 가입을 축하합니다.`);
         navigate('/');
       } else {

@@ -68,13 +68,24 @@
     },
     {
       "id": 7,
-      "userid": "3067792527",
+      "userid": "30677925271",
       "nickname": "ㄴㅇㄹ",
       "email": "ㅁㄴㅇㄹ",
       "phone": "ㄴㅁㅇㄹ",
       "address1": "ㄴㅁㅇㄹ",
       "address2": "ㅁㄴㅇㄹ",
       "address3": "ㅁㄴㅇㄹ",
+      "status": 1
+    },
+    {
+      "id": 8,
+      "userid": "3067792527",
+      "nickname": "asdf",
+      "email": "sadf",
+      "phone": "asdf",
+      "address1": "asdf",
+      "address2": "asdf",
+      "address3": "asdf",
       "status": 1
     }
   ]
