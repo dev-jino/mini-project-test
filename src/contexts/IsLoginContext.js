@@ -10,7 +10,7 @@ export const IsLoginContext = createContext({
 });
 
 // Provider
-export function IsLoginProvider({ children }) {
+export function IsLoginProvider({children}) {
     const [isLogin, setIsLogin] = useState(
         userData !== null && accessToken !== null ? true : false
     );
@@ -23,9 +23,12 @@ export function IsLoginProvider({ children }) {
     ), [isLogin, setIsLogin]);
 
     return (
-        <IsLoginContext value={value}>
+        <>
+        <IsLoginContext.Provider value={value}>
             {children}
-        </IsLoginContext>
+        </IsLoginContext.Provider>
+
+        </>
     );
 }
 

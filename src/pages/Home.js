@@ -3,12 +3,21 @@ import logo from "../assets/images/logo-img.png";
 import github_logo from "../assets/images/github-icon.png";
 import search_logo from "../assets/images/search-icon.png";
 import { useIsLoginState } from "../contexts/IsLoginContext";
+import { useContext } from "react";
+import { IsLoginContext } from "../contexts/IsLoginContext";
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
     const userData = JSON.parse(sessionStorage.getItem("userData"));
     console.log("userData", userData);
     console.log("access_token", sessionStorage.getItem("access_token"));
     console.log("refresh_token", sessionStorage.getItem("refresh_token"));
+    const data = useContext(IsLoginContext);
+    const { setIsLogin } = useContext(IsLoginContext);
+    const navigate = useNavigate();
+
+
+    console.log("data : ", data);
 
     function HeaderMenu() {
         const isLogin = useIsLoginState();
@@ -16,13 +25,19 @@ function Home() {
         return <>{isLogin === true ? UserMenu() : Menu()}</>;
     }
 
+    const logoutHandler = () => {
+        sessionStorage.clear();
+        setIsLogin(false);
+        navigate('/');
+    }
+
     const UserMenu = () => {
         return (
             <div class="main-menu">
                 <div class="menu-item"><div class="menu-item-txt">장바구니</div></div>
                 <div class="menu-item"><div class="menu-item-txt">주문조회</div></div>
-                <div class="menu-item"><div class="text-wrapper">마이페이지</div></div>
-                <div class="menu-item"><div class="menu-item-txt">로그아웃</div></div>
+                {/* <div class="menu-item"><div class="text-wrapper">마이페이지</div></div> */}
+                <div class="menu-item"><div class="menu-item-txt" onClick={logoutHandler}>로그아웃</div></div>
             </div>
         );
     }
@@ -36,7 +51,6 @@ function Home() {
     }
 
     return (
-
         <div class="home">
             <div class="wrapper">
                 <div class="home-header-wrap">

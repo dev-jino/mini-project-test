@@ -5,12 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 // import { IsLoginProvider } from "./contexts/IsLoginContext";
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
-  // <IsLoginProvider>
     <App />
-  // </IsLoginProvider>
   // </React.StrictMode>
 );
 

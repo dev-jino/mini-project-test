@@ -7,6 +7,8 @@ import { useEffect, useState, useContext } from 'react';
 import { IsLoginContext } from '../contexts/IsLoginContext';
 
 function KakaoLogin() {
+    const { setIsLogin } = useContext(IsLoginContext);
+    console.log("setIsLogin : ", setIsLogin);
     const [loginUserInfo, setLoginUserInfo] = useState({
         id:"",
         nickname:"",
@@ -14,7 +16,6 @@ function KakaoLogin() {
         data:""
     });
     const navigate = useNavigate();
-    const { setIsLogin } = useContext(IsLoginContext);
 
     useEffect(() => {
         const PARAMS = new URL(document.location).searchParams;
@@ -66,17 +67,16 @@ function KakaoLogin() {
         console.log('test');
         console.log("UserDB : ", loginUserInfo);
         if (loginUserInfo.id != '' && loginUserInfo.kakao_account != '') {
-            findUserData(loginUserInfo);
+            FindUserData(loginUserInfo);
         }
     }, [loginUserInfo]);
 
-    function findUserData(tokenData) {
+    function FindUserData(tokenData) {
         const tokenUserId = tokenData.id;
         const tokenKakaoAccount = tokenData.kakao_account;
         console.log(tokenData);
 
         const sessionStorage = window.sessionStorage;
-        // const { setIsLogin } = useContext(IsLoginContext);
 
         const xhr = new XMLHttpRequest();
     
@@ -99,11 +99,7 @@ function KakaoLogin() {
                     navigate('/join', {state: tokenData});
                 } else {
                     sessionStorage.setItem("userData", JSON.stringify(users));
-                    // sessionStorage.setItem("access_token", tokenData.data.access_token);
-                    // sessionStorage.setItem("refresh_token", tokenData.data.refresh_token);
-                    
                     setIsLogin(true);
-
                     console.log('로그인 완료');
                     navigate('/');
                 }

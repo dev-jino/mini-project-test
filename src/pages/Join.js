@@ -3,11 +3,15 @@ import logo from "../assets/images/logo-img.png";
 import github_logo from "../assets/images/github-icon.png";
 import search_logo from "../assets/images/search-icon.png";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { IsLoginContext } from '../contexts/IsLoginContext';
+import Post from "../components/Post";
 
 function Join() {
   const { state } = useLocation();
+  const { setIsLogin } = useContext(IsLoginContext);
   const navigate = useNavigate();
+  const [addressObj, setAddressObj] = useState('');
   console.log("state : ", state);
 
   const [userInfo, setUserInfo] = useState({
@@ -42,7 +46,7 @@ function Join() {
         console.log(post);
 
         sessionStorage.setItem("userData", JSON.stringify(post));
-
+        setIsLogin(true);
 
         alert(`${post.nickname}님의 가입을 축하합니다.`);
         navigate('/');
@@ -177,33 +181,21 @@ function Join() {
                     </div>
                     <input
                       className="join-input-2"
-                      onChange={(e) =>
-                        setUserInfo((prevState) => {
-                          return { ...prevState, address1: e.target.value };
-                        })
-                      }
+                      value={addressObj.zonecode}
+                      readonly
                       required
                     ></input>
-                    <div className="button-find-zipcode">
-                      <div className="button-find-zipcode-2">우편번호 찾기</div>
-                    </div>
+                    {/* <div className="button-find-zipcode"> */}
+                      {/* <button className="button-find-zipcode-2">우편번호 찾기</button> */}
+                      <Post setAddressObj={setAddressObj}/>
+                    {/* </div> */}
                     <input
                       className="join-input"
-                      onChange={(e) =>
-                        setUserInfo((prevState) => {
-                          return { ...prevState, address2: e.target.value };
-                        })
-                      }
+                      value={addressObj.fullAddress}
+                      readonly
                       required
                     ></input>
-                    <input
-                      className="join-input"
-                      onChange={(e) =>
-                        setUserInfo((prevState) => {
-                          return { ...prevState, address3: e.target.value };
-                        })
-                      }
-                    ></input>
+                    <input className="join-input"></input>
                   </div>
                   <div className="join-button">
                     <button type="submit" className="button-confirm">
