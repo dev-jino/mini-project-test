@@ -3,7 +3,7 @@ import logo from "../assets/images/logo-img.png";
 import github_logo from "../assets/images/github-icon.png";
 import search_logo from "../assets/images/search-icon.png";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { IsLoginContext } from '../contexts/IsLoginContext';
 import Post from "../components/Post";
 
@@ -182,7 +182,13 @@ function Join() {
                     <input
                       className="join-input-2"
                       value={addressObj.zonecode}
-                      readonly
+                      // defaultValue={addressObj.zonecode}
+                      onChange={(e) =>
+                        setUserInfo((prevState) => {
+                          return { ...prevState, address1: e.target.value };
+                        })
+                      }
+                      // readOnly
                       required
                     ></input>
                     {/* <div className="button-find-zipcode"> */}
@@ -192,10 +198,19 @@ function Join() {
                     <input
                       className="join-input"
                       value={addressObj.fullAddress}
-                      readonly
+                      onChange={(e) =>
+                        setUserInfo((prevState) => {
+                          return { ...prevState, address2: e.target.value };
+                        })
+                      }
+                      // readOnly
                       required
                     ></input>
-                    <input className="join-input"></input>
+                    <input className="join-input" onChange={(e) =>
+                        setUserInfo((prevState) => {
+                          return { ...prevState, address3: e.target.value };
+                        })
+                      }></input>
                   </div>
                   <div className="join-button">
                     <button type="submit" className="button-confirm">

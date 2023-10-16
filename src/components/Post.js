@@ -23,20 +23,6 @@ const Post = (props) => {
           });
 
           console.log(`${fullAddress}`)
-        // } else {
-        //   if (data.bname !== '') {
-        //     extraAddress += data.bname; //법정동, 법정리
-        //   }
-        //   if (data.buildingName !== '') { //건물명
-        //     extraAddress += (extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName);
-        //   }
-
-        //   extraAddress += `(${extraAddress})`
-
-        //     props.setAddressObj({
-        //         zonecode : data.zonecode,
-        //         fullAddress : fullAddress += `(${extraAddress})`
-        //     });
         // }
       }
 
